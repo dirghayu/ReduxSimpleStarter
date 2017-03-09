@@ -1,15 +1,22 @@
-import React from 'react';
+
+import React from  'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import SearchBar from './components/search_bar'
+import YTSearch from 'youtube-api-search'
 
-import App from './components/app';
-import reducers from './reducers';
+// Create a new component. This component should produce some html
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+const API_KEY = 'AIzaSyDjDjpPAobAlpnK_p883w7cZ9mV6Ub6GAg';
 
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
-  </Provider>
-  , document.querySelector('.container'));
+YTSearch({key: API_KEY, term: 'surfboards'},function(data){
+console.log(data);
+});
+
+const App =() => {
+    return <div>
+    <SearchBar />
+    </div>;
+}
+
+//Take this components generated html and put it on the page.
+    ReactDOM.render(<App />, document.querySelector('.container'));
